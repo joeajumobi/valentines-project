@@ -1,0 +1,239 @@
+/* ============================
+   GLOBAL & LAYOUT
+   ============================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+    background:
+  radial-gradient(circle at 20% 30%, rgba(255,255,255,0.4), transparent 40%),
+  linear-gradient(180deg, #ff7fb8, #ffd6e6);
+
+
+
+  color: #333;
+}
+
+.page {
+  max-width: 1100px;
+  margin: auto;
+  padding: clamp(24px, 5vw, 40px) 16px clamp(96px, 14vw, 120px); /* responsive bottom padding */
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 6px;
+  font-size: clamp(26px, 6vw, 42px); /* was 42px */
+  color: #d81b60;
+}
+
+.sub {
+  margin-bottom: clamp(14px, 3.5vw, 24px);
+  opacity: 0.85;
+  font-style: italic;
+  font-size: clamp(14px, 3.5vw, 18px);
+}
+
+/* ============================
+   MAIN COLLAGE GRID
+   ============================ */
+.collage {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(170px, 46vw, 240px), 1fr));
+  gap: clamp(10px, 3vw, 16px);
+  
+    padding: 20px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+
+}
+
+.memory-card {
+  border-radius: clamp(14px, 3vw, 18px);
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(255, 105, 180, 0.25);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: #fff;
+
+  
+}
+
+.memory-card:hover {
+  transform: scale(1.03) translateY(-5px);
+}
+
+.memory-media {
+  width: 100%;
+  height: clamp(190px, 38vw, 260px); /* was 260px */
+  object-fit: cover;
+  display: block;
+}
+
+.memory-text {
+  display: none; /* Only shown in the zoom viewer */
+}
+
+/* ============================
+   FULL SCREEN VIEWER
+   ============================ */
+.viewer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.viewer.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.viewer-content {
+  max-width: 92vw;
+  max-height: 92vh;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.viewer-content img,
+.viewer-content video {
+  max-width: 100%;
+  max-height: clamp(52vh, 65vh, 70vh); /* keeps desktop similar, helps small phones */
+  border-radius: clamp(10px, 2.5vw, 12px);
+  box-shadow: 0 0 30px rgba(255,182,193,0.3);
+}
+
+.viewer-text {
+  margin-top: clamp(12px, 3vw, 20px);
+  color: white;
+  font-size: clamp(15px, 4vw, 20px); /* was 20px */
+  line-height: 1.5;
+  padding: 0 clamp(10px, 4vw, 20px);
+}
+
+/* ============================
+   HEART PARTICLES
+   ============================ */
+.hearts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heart {
+  position: absolute;
+  bottom: -50px;
+  left: var(--x);
+  font-size: var(--size);
+  opacity: 0;
+  animation: floatUp var(--dur) ease-in forwards;
+}
+
+@keyframes floatUp {
+  0%   { transform: translateX(-50%) translateY(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  100% { transform: translateX(calc(-50% + var(--drift))) translateY(-110vh) rotate(var(--rot)); opacity: 0; }
+}
+
+/* ============================
+   BOTTOM AUTO-SCROLL REEL
+   ============================ */
+.bottom-reel {
+  position: fixed;
+  bottom: clamp(10px, 3vw, 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(95vw, 1000px); /* was width:90% + max-width */
+  padding: clamp(10px, 3vw, 15px);
+  border-radius: clamp(18px, 4vw, 24px);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  z-index: 50;
+}
+
+.bottom-reel-title {
+  font-weight: 600;
+  font-size: clamp(10px, 2.6vw, 12px);
+  margin: 0 0 clamp(6px, 2vw, 10px);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #d81b60;
+}
+
+.reel {
+  overflow: hidden;
+  position: relative;
+  padding: clamp(6px, 2vw, 10px) 0;
+  border-radius: clamp(12px, 3vw, 18px);
+
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.reel-track {
+  display: flex;
+  gap: clamp(10px, 3vw, 15px);
+  width: max-content;
+  animation: reelMove 45s linear infinite;
+  will-change: transform;
+}
+
+.reel-item:hover ~ .reel-item,
+.reel:hover .reel-track {
+  animation-play-state: paused;
+}
+
+.reel-item:hover {
+  transform: scale(1.10);
+}
+
+.reel:hover .reel-track {
+  animation-play-state: paused;
+}
+
+.reel-item {
+  flex: 0 0 auto;
+  width: clamp(86px, 22vw, 120px);   /* was 120px */
+  height: clamp(64px, 16vw, 90px);   /* was 90px */
+  border-radius: clamp(10px, 2.8vw, 14px);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.reel-item img,
+.reel-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@keyframes reelMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ✅ Keep your existing media query (still fine) */
+@media (max-width: 600px) {
+  .bottom-reel { width: 95%; bottom: 10px; }
+  .reel-item { width: 100px; height: 75px; }
+}

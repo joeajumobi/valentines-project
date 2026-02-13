@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="valentine.css" />
+  <title>Valentine Letter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet"
+  />
+</head>
+
+<body>
+  <!-- Envelope Screen -->
+  <div id="envelop-container">
+    <img src="Envelope.png" alt="Envelope" id="Envelope" />
+    <p>💕 Letter for my Love 💕</p>
+  </div>
+
+  <!-- Letter Screen -->
+  <div id="letter-container">
+    <div class="letter-window">
+      <h1 id="letter-title">Will you be my Valentine?</h1>
+
+      <!-- Cat + Click Me button next to it -->
+      <div class="cat-row">
+        <img src="kitty.gif" class="cat" id="letter-cat" alt="Cat" />
+
+        <!-- hidden until YES -->
+        <img
+          src="ClickMe.png"
+          id="collage-btn"
+          class="collage-btn"
+          alt="Click Me"
+          style="display: none;"
+        />
+      </div>
+
+      <div class="buttons" id="letter-buttons">
+        <img src="yesBTN.png" class="btn yes-btn" alt="Yes" />
+        <div class="no-wrapper">
+          <img src="noBTN.png" class="btn no-btn" alt="No" />
+        </div>
+      </div>
+
+      <p id="final-text" class="final-text" style="display: none">
+        <strong>Valentine Date:</strong> Meow Restaurant at 7
+      </p>
+    </div>
+  </div>
+
+  <script src="valentine.js"></script>
+</body>
+</html>
